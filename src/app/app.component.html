@@ -177,7 +177,18 @@
   }
 </style>
 
-<main class="main">
+<div *ngIf="group == undefined" class="form-container">
+  <div class="form-content">
+      <form>
+          <div class="mb-3">
+              <input type="text" class="form-control" id="groupCode" placeholder="Enter Group Code">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+  </div>
+</div>
+
+<main class="main" *ngIf="group != undefined">
   <div class="content">
     <div class="left-side">
       <svg
