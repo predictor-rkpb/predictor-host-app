@@ -14,6 +14,11 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "paths": {
+      "shared-lib": [
+        "./projects/predictor-angular-shared-lib/src/public-api"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

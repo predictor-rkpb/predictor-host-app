@@ -3,19 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { keycloakConfig } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
+import { UserMgmtModule, UserDetailsService } from "shared-lib";
+import { AuthGuard } from './auth.guard';
 
-function initializeKeycloak(keycloak: KeycloakService) {
-  return () =>
-    keycloak.init({
-      config: keycloakConfig,
-      initOptions: {
-        onLoad: 'login-required',
-        checkLoginIframe: false,
-      },
-    });
+function initializeKeycloak(service: UserDetailsService) {
+  return async () =>  {
+    await service.init(keycloakConfig)
+  }
 }
 
 @NgModule({
@@ -25,16 +21,17 @@ function initializeKeycloak(keycloak: KeycloakService) {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    KeycloakAngularModule,
-    FormsModule
+    FormsModule,
+    UserMgmtModule
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
-      deps: [KeycloakService],
+      deps: [UserDetailsService],
     },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
+import { UserDetailsService } from 'shared-lib';
 
 @Component({
   selector: 'app-root',
@@ -8,22 +10,21 @@ import { KeycloakService } from 'keycloak-angular';
 })
 export class AppComponent implements OnInit {
   group: string | undefined
-  title = 'predictor-host-app';
+  userLoggedIn: boolean = false
 
-  constructor(private keycloakService: KeycloakService) {
+  constructor(
+    private userDetailsService: UserDetailsService,
+    private router: Router
+  ) {
 
   }
 
   async ngOnInit(): Promise<void> {
-    if (await this.keycloakService.isLoggedIn()) {
-      const tokenParsed = this.keycloakService.getKeycloakInstance().tokenParsed;
-
-      this.group = tokenParsed ? (tokenParsed['groups'] ? tokenParsed['groups'][0] : null) : null
-      if (this.group){
-        this.group = this.group.substring(1, this.group.length)
-        console.log(this.group)
-        const profile = await this.keycloakService.loadUserProfile();
-      }
-    }
+    this.userLoggedIn = this.userDetailsService.isLoggedIn()
+    this.group = await this.userDetailsService.getUserGroup()
+    if (this.group)
+      this.router.navigate(['home'])
+    else if (this.userDetailsService.isLoggedIn())
+      this.router.navigate(['groupCodePrompt'])
   }
 }
