@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { keycloakConfig } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
 import { UserMgmtModule, UserDetailsService } from "shared-lib";
-import { AuthGuard } from './auth.guard';
 
 function initializeKeycloak(service: UserDetailsService) {
   return async () =>  {
@@ -31,7 +30,6 @@ function initializeKeycloak(service: UserDetailsService) {
       multi: true,
       deps: [UserDetailsService],
     },
-    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
