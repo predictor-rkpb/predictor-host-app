@@ -3,3 +3,5 @@ export const keycloakConfig = {
     realm: 'predictor-dev',
     clientId: 'front-end',
 }
+
+export const headerComponentUrl = 'http://localhost:4300/remoteEntry.js'

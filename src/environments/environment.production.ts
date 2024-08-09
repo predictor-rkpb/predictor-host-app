@@ -3,3 +3,5 @@ export const keycloakConfig = {
     realm: 'predictor',
     clientId: 'front-end',
 }
+
+export const headerComponentUrl = 'https://ashy-cliff-025b3ea0f.5.azurestaticapps.net/remoteEntry.js'

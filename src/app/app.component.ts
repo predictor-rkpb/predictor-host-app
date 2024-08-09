@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { UserDetailsService } from 'shared-lib';
+import { headerComponentUrl } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,7 @@ export class AppComponent implements OnInit {
   async loadRemote(): Promise<void> {
     const m = await loadRemoteModule({
       remoteName: 'predictorHeader',
-      remoteEntry: 'http://localhost:4300/remoteEntry.js',
+      remoteEntry: headerComponentUrl,
       exposedModule: 'HeaderComponent'
     });
     const componentRef = this.viewContainer.createComponent(m.HeaderComponent);
