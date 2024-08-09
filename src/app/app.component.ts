@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { loadRemoteModule } from '@angular-architects/module-federation';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { UserDetailsService } from 'shared-lib';
+import { headerComponentUrl } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,7 @@ import { UserDetailsService } from 'shared-lib';
 export class AppComponent implements OnInit {
   group: string | undefined
   userLoggedIn: boolean = false
+  @ViewChild('header', { read: ViewContainerRef }) viewContainer!: ViewContainerRef;
 
   constructor(
     private userDetailsService: UserDetailsService,
@@ -20,11 +23,21 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.loadRemote()
     this.userLoggedIn = this.userDetailsService.isLoggedIn()
     this.group = await this.userDetailsService.getUserGroup()
     if (this.group)
       this.router.navigate(['home'])
     else if (this.userDetailsService.isLoggedIn())
       this.router.navigate(['groupCodePrompt'])
+  }
+
+  async loadRemote(): Promise<void> {
+    const m = await loadRemoteModule({
+      remoteName: 'predictorHeader',
+      remoteEntry: headerComponentUrl,
+      exposedModule: 'HeaderComponent'
+    });
+    const componentRef = this.viewContainer.createComponent(m.HeaderComponent);
   }
 }
