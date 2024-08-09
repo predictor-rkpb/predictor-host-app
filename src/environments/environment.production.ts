@@ -4,4 +4,4 @@ export const keycloakConfig = {
     clientId: 'front-end',
 }
 
-export const headerComponentUrl = 'https://ashy-cliff-025b3ea0f.5.azurestaticapps.net/remoteEntry.js'
+export const headerComponentUrl = '/header-app/remoteEntry.js'
