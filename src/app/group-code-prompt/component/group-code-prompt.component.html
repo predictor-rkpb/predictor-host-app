@@ -1,11 +1,14 @@
 <div class="form-container">
     <div class="form-content">
-        <form>
-            <div class="mb-3">
-                <input type="text" class="form-control" id="groupCode" placeholder="Enter Group Code">
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
-        </form>
+        <!-- <form> -->
+        <div class="mb-2 no-margin">
+            <input type="text" class="form-control" id="groupCode" placeholder="Enter Group Code"
+                [(ngModel)]="groupCode">
+        </div>
+
+        <p *ngIf="errorMessage" class="text-danger text-center mb-2">{{ errorMessage }}</p>
+
+        <button class="btn btn-primary w-100" (click)="onSubmit()">Submit</button>
+        <!-- </form> -->
     </div>
 </div>
-

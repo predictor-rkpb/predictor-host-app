@@ -14,8 +14,11 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
+      "angular-shared-lib": [
+        "./projects/predictor-angular-shared-lib/src/public-api",
+      ],
       "shared-lib": [
-        "./projects/predictor-angular-shared-lib/src/public-api"
+        "./projects/shared-lib/src/index",
       ]
     },
     "importHelpers": true,

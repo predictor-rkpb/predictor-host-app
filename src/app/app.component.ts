@@ -2,7 +2,7 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { UserDetailsService } from 'shared-lib';
+import { UserDetailsService } from 'angular-shared-lib';
 import { headerComponentUrl } from '../environments/environment';
 
 @Component({

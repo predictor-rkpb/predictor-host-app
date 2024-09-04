@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { keycloakConfig } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
-import { UserMgmtModule, UserDetailsService } from "shared-lib";
+import { UserMgmtModule, UserDetailsService } from "angular-shared-lib";
 
 function initializeKeycloak(service: UserDetailsService) {
-  return async () =>  {
+  return async () => {
     await service.init(keycloakConfig)
   }
 }
